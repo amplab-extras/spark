@@ -31,6 +31,7 @@ import org.apache.spark.sql.catalyst.expressions._
 import org.apache.spark.sql.catalyst.ScalaReflection
 import org.apache.spark.sql.types._
 import org.apache.spark.Logging
+import org.apache.spark.util.DateUtils
 
 private[sql] object JsonRDD extends Logging {
 

@@ -19,7 +19,7 @@ package org.apache.spark.sql.catalyst
 
 import java.sql.Timestamp
 
-import org.apache.spark.util.Utils
+import org.apache.spark.util.{Utils, DateUtils}
 import org.apache.spark.sql.catalyst.expressions._
 import org.apache.spark.sql.catalyst.plans.logical.LocalRelation
 import org.apache.spark.sql.types._

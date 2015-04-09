@@ -15,12 +15,10 @@
  * limitations under the License.
  */
 
-package org.apache.spark.sql.types
+package org.apache.spark.util
 
 import java.sql.Date
 import java.util.{Calendar, TimeZone}
-
-import org.apache.spark.sql.catalyst.expressions.Cast
 
 /**
  * helper function to convert between Int value of days since 1970-01-01 and java.sql.Date
@@ -55,6 +53,4 @@ object DateUtils {
   def toJavaDate(daysSinceEpoch: Int): java.sql.Date = {
     new java.sql.Date(toMillisSinceEpoch(daysSinceEpoch))
   }
-
-  def toString(days: Int): String = Cast.threadLocalDateFormat.get.format(toJavaDate(days))
 }

@@ -7,16 +7,12 @@
 
 package org.apache.spark.repl
 
-import org.apache.spark.annotation.DeveloperApi
-
-import scala.tools.nsc._
+import scala.collection.mutable.ListBuffer
+import scala.tools.nsc.interpreter.Completion._
 import scala.tools.nsc.interpreter._
 
-import scala.tools.jline._
-import scala.tools.jline.console.completer._
-import Completion._
-import scala.collection.mutable.ListBuffer
 import org.apache.spark.Logging
+import org.apache.spark.annotation.DeveloperApi
 
 /**
  * Represents an auto-completion tool for the supplied interpreter that
@@ -33,10 +29,10 @@ class SparkJLineCompletion(val intp: SparkIMain) extends Completion with Complet
   val global: intp.global.type = intp.global
 
   import global._
-  import definitions.{ PredefModule, AnyClass, AnyRefClass, ScalaPackage, JavaLangPackage }
-  import rootMirror.{ RootClass, getModuleIfDefined }
+  import definitions.{AnyClass, AnyRefClass, JavaLangPackage, PredefModule, ScalaPackage}
+  import rootMirror.{RootClass, getModuleIfDefined}
   type ExecResult = Any
-  import intp.{ debugging }
+  import intp.debugging
 
   /**
    * Represents the level of verbosity. Increments with consecutive tabs.

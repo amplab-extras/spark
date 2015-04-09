@@ -20,6 +20,7 @@ package org.apache.spark.sql.catalyst.expressions
 import java.sql.{Date, Timestamp}
 
 import org.apache.spark.sql.types._
+import org.apache.spark.util.DateUtils
 
 object Literal {
   def apply(v: Any): Literal = v match {

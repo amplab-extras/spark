@@ -247,7 +247,11 @@ abstract class CodeGenerator[InType <: AnyRef, OutType <: AnyRef] extends Loggin
         """.children
 
       case Cast(child @ DateType(), StringType) =>
-        child.castOrNull(c => q"org.apache.spark.sql.types.DateUtils.toString($c)", StringType)
+        child.castOrNull(c =>
+          q"""org.apache.spark.sql.catalyst.expressions.Cast.threadLocalDateFormat.get.format(
+                org.apache.spark.util.DateUtils.toJavaDate($c.toInt))
+           """,
+          StringType)
 
       case Cast(child @ NumericType(), IntegerType) =>
         child.castOrNull(c => q"$c.toInt", IntegerType)

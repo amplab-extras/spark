@@ -22,6 +22,8 @@ import java.sql.{Date, Time}
 
 import scala.collection.JavaConversions._
 
+import org.apache.spark.util.DateUtils
+
 /**
  * Utility functions to serialize, deserialize objects to / from R
  */
@@ -101,7 +103,7 @@ private[spark] object SerDe {
 
   def readDate(in: DataInputStream): Date = {
     val d = in.readInt()
-    new Date(d.toLong * 24 * 3600 * 1000)
+    DateUtils.toJavaDate(d)
   }
 
   def readTime(in: DataInputStream): Time = {
@@ -277,7 +279,8 @@ private[spark] object SerDe {
   }
 
   def writeDate(out: DataOutputStream, value: Date): Unit = {
-    out.writeInt((value.getTime / 1000 / 3600 / 24).toInt)
+    val d = DateUtils.fromJavaDate(value)
+    out.writeInt(d)
   }
 
   def writeTime(out: DataOutputStream, value: Time): Unit = {

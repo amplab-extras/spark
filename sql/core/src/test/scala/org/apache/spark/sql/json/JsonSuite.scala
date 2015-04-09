@@ -22,7 +22,6 @@ import java.sql.{Date, Timestamp}
 import org.scalactic.Tolerance._
 
 import org.apache.spark.sql.TestData._
-import org.apache.spark.sql.functions._
 import org.apache.spark.sql.json.JsonRDD.{compatibleType, enforceCorrectType}
 import org.apache.spark.sql.sources.LogicalRelation
 import org.apache.spark.sql.test.TestSQLContext
@@ -30,7 +29,7 @@ import org.apache.spark.sql.test.TestSQLContext._
 import org.apache.spark.sql.test.TestSQLContext.implicits._
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.{QueryTest, Row, SQLConf}
-import org.apache.spark.util.Utils
+import org.apache.spark.util.{DateUtils, Utils}
 
 class JsonSuite extends QueryTest {
   import org.apache.spark.sql.json.TestJsonData._

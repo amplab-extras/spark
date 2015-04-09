@@ -35,6 +35,7 @@ import org.apache.spark.sql.catalyst.plans.logical.LogicalPlan
 import org.apache.spark.sql.catalyst.rules.Rule
 import org.apache.spark.sql.types._
 import org.apache.spark.{Accumulator, Logging => SparkLogging}
+import org.apache.spark.util.DateUtils
 
 /**
  * A serialized version of a Python lambda function.  Suitable for use in a [[PythonRDD]].

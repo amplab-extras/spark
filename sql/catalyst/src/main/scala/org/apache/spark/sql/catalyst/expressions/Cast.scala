@@ -21,8 +21,8 @@ import java.sql.{Date, Timestamp}
 import java.text.{DateFormat, SimpleDateFormat}
 
 import org.apache.spark.Logging
-import org.apache.spark.sql.catalyst.errors.TreeNodeException
 import org.apache.spark.sql.types._
+import org.apache.spark.util.DateUtils
 
 /** Cast the child expression to the target data type. */
 case class Cast(child: Expression, dataType: DataType) extends UnaryExpression with Logging {
@@ -113,7 +113,8 @@ case class Cast(child: Expression, dataType: DataType) extends UnaryExpression w
   // UDFToString
   private[this] def castToString(from: DataType): Any => Any = from match {
     case BinaryType => buildCast[Array[Byte]](_, new String(_, "UTF-8"))
-    case DateType => buildCast[Int](_, d => DateUtils.toString(d))
+    case DateType => buildCast[Int](_, d =>
+      Cast.threadLocalDateFormat.get.format(DateUtils.toJavaDate(d)))
     case TimestampType => buildCast[Timestamp](_, timestampToString)
     case _ => buildCast[Any](_, _.toString)
   }

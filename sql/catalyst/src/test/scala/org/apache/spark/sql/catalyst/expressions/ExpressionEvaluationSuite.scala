@@ -28,7 +28,7 @@ import org.scalatest.Matchers._
 import org.apache.spark.sql.catalyst.dsl.expressions._
 import org.apache.spark.sql.catalyst.analysis.UnresolvedGetField
 import org.apache.spark.sql.types._
-
+import org.apache.spark.util.DateUtils
 
 class ExpressionEvaluationBaseSuite extends FunSuite {
 
